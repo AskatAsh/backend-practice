@@ -12,6 +12,13 @@ app.get('/phones', (req, res) => {
     res.send(phones);
 })
 
+app.get('/phone/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    console.log("get phone id from phones API: ", id)
+    const phone = phones.find(phone => phone.id === id) || {};
+    res.send(phone);
+})
+
 app.listen(port, () => {
     console.log(`Listen phone server from port ${port}`);
 })
