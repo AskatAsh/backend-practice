@@ -17,9 +17,15 @@ function App() {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(user),
-          
+
         }).then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+          console.log(data);
+          if(data.insertedId){
+            alert("User Added to Database Successfully!")
+            form.reset();
+          }
+        })
   }
 
   return (
