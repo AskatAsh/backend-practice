@@ -7,8 +7,8 @@ const port = process.env.PORT || 5000;
 
 const users = [
     {id: 1, name: "Arman", email: "arman@gmail.com"},
-    {id: 1, name: "Sakib", email: "sakib@gmail.com"},
-    {id: 1, name: "Jamil", email: "jamil@gmail.com"},
+    {id: 2, name: "Sakib", email: "sakib@gmail.com"},
+    {id: 3, name: "Jamil", email: "jamil@gmail.com"},
 ]
 
 app.use(cors());
