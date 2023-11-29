@@ -12,6 +12,7 @@ const users = [
 ]
 
 app.use(cors());
+app.use(express.json());
 
 app.get('/users', (req, res) => {
     res.send(users);
