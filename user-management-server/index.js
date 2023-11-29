@@ -21,6 +21,10 @@ app.get('/users', (req, res) => {
 app.post('/users', (req, res) => {
     console.log("the post request is hitting.");
     console.log(req.body);
+    const newUser = req.body;
+    newUser.id = users.length + 1;
+    users.push(newUser);
+    res.send(newUser);
 })
 
 app.get('/', (req, res) => {
