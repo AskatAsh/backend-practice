@@ -17,6 +17,11 @@ app.get('/users', (req, res) => {
     res.send(users);
 })
 
+app.post('/users', (req, res) => {
+    console.log("the post request is hitting.");
+    console.log(req.body);
+})
+
 app.get('/', (req, res) => {
     res.send("User Management Server is running.");
 })
