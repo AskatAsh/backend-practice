@@ -21,6 +21,11 @@ const Update = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data);
+            if(data.modifiedCount > 0){
+                alert("You have successfully updated user information..!");
+            }else{
+                alert("Sorry! failed to update user information.");
+            }
         })
     }
     return (
