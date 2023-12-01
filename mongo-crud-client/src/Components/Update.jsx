@@ -9,14 +9,27 @@ const Update = () => {
         const name = form.name.value;
         const email = form.email.value;
         console.log(name, email);
+        const updateUser = {name, email};
+
+        fetch(`http://localhost:5000/users/${loadedUser._id}`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updateUser)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
     }
     return (
         <div>
             <h2>Update the user: {loadedUser.name}</h2>
             <form onSubmit={handleUpdate}>
-                <input type="text" name="name" defaultValue={loadedUser.name} id="" />
+                <input type="text" name="name" defaultValue={loadedUser?.name} id="" />
                 <br />
-                <input type="email" name="email" defaultValue={loadedUser.email} id="" />
+                <input type="email" name="email" defaultValue={loadedUser?.email} id="" />
                 <br />
                 <input type="submit" value="Update" />
             </form>

@@ -49,6 +49,12 @@ async function run() {
             res.send(result)
         })
 
+        app.put('/users/:id', async(req, res) => {
+            const id = req.params.id;
+            const user = req.body;
+            console.log(id, user);
+        })
+
         app.delete('/users/:id', async (req, res) => {
             const id = req.params.id;
             console.log("Please delete: ", id);
