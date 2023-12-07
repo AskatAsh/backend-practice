@@ -6,7 +6,7 @@ import { RiEdit2Fill, RiDeleteBin6Fill } from "react-icons/ri";
 
 
 const CoffeeCard = ({ coffee }) => {
-    const { coffeeName, quantity, supplier, photoURL } = coffee;
+    const { _id, coffeeName, quantity, supplier, photoURL } = coffee;
     return (
         <div className='text-[#1B1A1A] font-primary flex flex-col lg:flex-row items-center gap-8 bg-[#F5F4F1] rounded-lg p-8'>
             {/* image */}
@@ -21,7 +21,7 @@ const CoffeeCard = ({ coffee }) => {
             </div>
             {/* view, update delete */}
             <div className='flex flex-row lg:flex-col gap-3'>
-                <Link>
+                <Link to={`/coffee/${_id}`}>
                     <button className="bg-[#D2B48C] w-[40px] h-[40px] flex items-center justify-center text-xl text-[#331A15]">
                         <FaEye />
                     </button>
