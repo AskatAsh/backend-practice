@@ -5,7 +5,7 @@ import { RiEdit2Fill, RiDeleteBin6Fill } from "react-icons/ri";
 import Swal from 'sweetalert2'
 
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
     const { _id, coffeeName, quantity, supplier, photoURL } = coffee;
 
     const handleDelete = (id) => {
@@ -27,6 +27,8 @@ const CoffeeCard = ({ coffee }) => {
                     .then(data => {
                         console.log(data);
                         if (data.deletedCount > 0) {
+                            const remainingCoffees = coffees.filter(coffee => coffee._id !== id);
+                            setCoffees(remainingCoffees);
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your Coffee has been deleted.",
@@ -75,7 +77,9 @@ const CoffeeCard = ({ coffee }) => {
 };
 
 CoffeeCard.propTypes = {
-    coffee: PropTypes.object
+    coffee: PropTypes.object,
+    coffees: PropTypes.array,
+    setCoffees: PropTypes.func
 };
 
 export default CoffeeCard;
