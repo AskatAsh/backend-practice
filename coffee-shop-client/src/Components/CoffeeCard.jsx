@@ -60,7 +60,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
                         <FaEye />
                     </button>
                 </Link>
-                <Link>
+                <Link to={`/update_coffee/${_id}`}>
                     <button className="bg-[#D2B48C] w-[40px] h-[40px] flex items-center justify-center text-xl text-[#331A15]">
                         <RiEdit2Fill />
                     </button>
