@@ -9,7 +9,7 @@ const CoffeeCard = ({ coffee }) => {
     const { _id, coffeeName, quantity, supplier, photoURL } = coffee;
 
     const handleDelete = (id) => {
-        console.log(id);
+        // console.log(id);
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -18,15 +18,25 @@ const CoffeeCard = ({ coffee }) => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
+                fetch(`http://localhost:5000/coffee/${id}`,{
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your Coffee has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+
             }
-          });
+        });
     }
 
     return (
@@ -55,7 +65,7 @@ const CoffeeCard = ({ coffee }) => {
                 </Link>
                 <Link>
                     <button onClick={() => handleDelete(_id)}
-                    className="bg-[#D2B48C] w-[40px] h-[40px] flex items-center justify-center text-xl text-[#331A15]">
+                        className="bg-[#D2B48C] w-[40px] h-[40px] flex items-center justify-center text-xl text-[#331A15]">
                         <RiDeleteBin6Fill />
                     </button>
                 </Link>
