@@ -1,42 +1,13 @@
-import { useEffect, useState } from 'react'
+import { Outlet } from 'react-router-dom';
 import './App.css'
-import { Link } from 'react-router-dom';
-import CoffeeCard from './Components/CoffeeCard';
 import Navbar from './Components/Navbar';
 
 function App() {
 
-  const [coffees, setCoffees] = useState([]);
-
-  useEffect(() => {
-
-    fetch('http://localhost:5000/coffee')
-      .then(res => res.json())
-      .then(data => setCoffees(data))
-
-  }, [])
-  // console.log(coffees);
-
-
   return (
     <>
       <Navbar></Navbar>
-
-      <h2 className='text-5xl font-bold text-[#331A15] font-secondary text-center'>Our Popular Products</h2>
-      <p className='py-5 text-center'>Total Coffe Data Added: {coffees.length}</p>
-      <div className='flex justify-center'>
-        <Link to='/add_coffee'>
-          <button className="btn bg-[#D2B48C] border-2 border-[#331A15] font-secondary text-2xl">
-            Add Coffee
-          </button>
-        </Link>
-      </div>
-
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-6 justify-center m-10'>
-        {
-          coffees.map(coffee => <CoffeeCard key={coffee._id} coffee={coffee} coffees={coffees} setCoffees={setCoffees}></CoffeeCard>)
-        }
-      </div>
+      <Outlet></Outlet>
     </>
   )
 }
