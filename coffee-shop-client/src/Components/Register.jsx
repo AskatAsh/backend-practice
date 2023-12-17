@@ -11,11 +11,28 @@ const Register = () => {
         const password = form.password.value;
         console.log(email, password);
         createUser(email, password)
-        .then(userCredentials => {
-            console.log(userCredentials.user)
-        }).catch(error => {
-            console.error(error)
-        })
+            .then(userCredentials => {
+                console.log(userCredentials.user);
+                const createdAt = userCredentials.user.metadata.creationTime;
+                const user = { email, createdAt: createdAt };
+                fetch('http://localhost:5000/user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                }).then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if(data.insertedId){
+                        console.log("Successfully saved user info in database");
+                    }
+                })
+
+
+            }).catch(error => {
+                console.error(error)
+            })
     }
     return (
         <div className="hero py-10 bg-base-200">
