@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { Link } from 'react-router-dom';
 import CoffeeCard from './Components/CoffeeCard';
+import Navbar from './Components/Navbar';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <>
+      <Navbar></Navbar>
 
       <h2 className='text-5xl font-bold text-[#331A15] font-secondary text-center'>Our Popular Products</h2>
       <p className='py-5 text-center'>Total Coffe Data Added: {coffees.length}</p>
