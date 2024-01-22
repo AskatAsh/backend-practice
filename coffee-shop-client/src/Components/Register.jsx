@@ -13,7 +13,7 @@ const Register = () => {
         createUser(email, password)
             .then(userCredentials => {
                 console.log(userCredentials.user);
-                const createdAt = userCredentials.user.metadata.creationTime;
+                const createdAt = userCredentials.user?.metadata?.creationTime;
                 const user = { email, createdAt: createdAt };
                 fetch('http://localhost:5000/user', {
                     method: 'POST',
@@ -28,8 +28,8 @@ const Register = () => {
                         console.log("Successfully saved user info in database");
                     }
                 })
-
-
+                form.reset();
+                
             }).catch(error => {
                 console.error(error)
             })
