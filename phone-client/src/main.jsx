@@ -18,12 +18,12 @@ const router = createBrowserRouter([
       {
         path: "/phones",
         element: <Phones></Phones>,
-        loader: () => fetch('https://coffee-shop-server-1ffisa7uf-askats-projects.vercel.app/phones')
+        loader: () => fetch('https://coffee-shop-backend-taupe.vercel.app/phones')
       },
       {
         path: "/phone/:id",
         element: <Phone></Phone>,
-        loader: ({params}) => fetch(`https://coffee-shop-server-1ffisa7uf-askats-projects.vercel.app/phone/${params.id}`)
+        loader: ({params}) => fetch(`https://coffee-shop-backend-taupe.vercel.app/phone/${params.id}`)
       }
     ],
   },

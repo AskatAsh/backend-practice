@@ -11,7 +11,7 @@ const Update = () => {
         console.log(name, email);
         const updateUser = {name, email};
 
-        fetch(`https://coffee-shop-server-1ffisa7uf-askats-projects.vercel.app/users/${loadedUser._id}`,{
+        fetch(`https://coffee-shop-backend-taupe.vercel.app/users/${loadedUser._id}`,{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

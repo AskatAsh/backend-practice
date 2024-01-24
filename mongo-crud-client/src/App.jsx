@@ -11,7 +11,7 @@ function App() {
         const user = {name, email};
         console.log(user);
 
-        fetch('https://coffee-shop-server-1ffisa7uf-askats-projects.vercel.app/users', {
+        fetch('https://coffee-shop-backend-taupe.vercel.app/users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    fetch('https://coffee-shop-server-1ffisa7uf-askats-projects.vercel.app/users')
+    fetch('https://coffee-shop-backend-taupe.vercel.app/users')
     .then(res => res.json())
     .then(data => setUsers(data));
   })
@@ -16,7 +16,7 @@ function App() {
     const email = userInfo.email.value;
     const user = {name, email};
     // console.log(user);
-    fetch('https://coffee-shop-server-1ffisa7uf-askats-projects.vercel.app/users', {
+    fetch('https://coffee-shop-backend-taupe.vercel.app/users', {
       method: "POST",
       headers: {
         "Content-type" : "application/json"
