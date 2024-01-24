@@ -5,9 +5,10 @@ const Users = () => {
 
     const loadedUsers = useLoaderData();
     const [users, setUsers] = useState(loadedUsers);
+
     const handleDelete = (id) => {
         // console.log("hello", id);
-        fetch(`http://localhost:5000/user/${id}`, {
+        fetch(`https://coffee-shop-server-1ffisa7uf-askats-projects.vercel.app/user/${id}`, {
             method: "DELETE"
         }).then(res => res.json())
             .then(data => {

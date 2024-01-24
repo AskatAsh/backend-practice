@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:5000/users')
+    fetch('https://coffee-shop-server-1ffisa7uf-askats-projects.vercel.app/users')
     .then(res => res.json())
     .then(data => setUsers(data));
   })
@@ -16,7 +16,7 @@ function App() {
     const email = userInfo.email.value;
     const user = {name, email};
     // console.log(user);
-    fetch('http://localhost:5000/users', {
+    fetch('https://coffee-shop-server-1ffisa7uf-askats-projects.vercel.app/users', {
       method: "POST",
       headers: {
         "Content-type" : "application/json"

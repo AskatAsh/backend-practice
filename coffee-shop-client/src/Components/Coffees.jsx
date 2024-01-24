@@ -9,7 +9,7 @@ const Coffees = () => {
 
     useEffect(() => {
 
-        fetch('http://localhost:5000/coffee')
+        fetch('https://coffee-shop-server-1ffisa7uf-askats-projects.vercel.app/coffee')
             .then(res => res.json())
             .then(data => setCoffees(data))
 

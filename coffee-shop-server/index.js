@@ -1,12 +1,19 @@
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const express = require('express');
 const cors = require('cors');
+const express = require('express');
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware
-app.use(cors());
+app.use(cors(
+  {
+    origin: ["https://coffee-shop-crud.web.app"],
+    methods: ["POST", "GET", "PUT", "PATCH"],
+    credentials: true
+  }
+));
+
 app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.fisbs9h.mongodb.net/?retryWrites=true&w=majority`;
@@ -23,7 +30,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const coffeeCollection = client.db('coffeeDB').collection('coffee');
     const userCollection = client.db('coffeeDB').collection('user');
@@ -122,6 +129,7 @@ async function run() {
 }
 run().catch(console.dir);
 
+// await client.connect();
 
 app.get('/', (req, res) => {
   res.send("Coffee Shop Server is Running..!");
