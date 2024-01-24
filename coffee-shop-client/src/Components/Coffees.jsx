@@ -19,7 +19,7 @@ const Coffees = () => {
     return (
         <>
             <h2 className='text-5xl font-bold text-[#331A15] font-secondary text-center'>Our Popular Products</h2>
-            <p className='py-5 text-center'>Total Coffe Data Added: {coffees.length}</p>
+            <p className='py-5 text-center'>Total Coffee Data Added: {coffees.length}</p>
             <div className='flex justify-center'>
                 <Link to='/add_coffee'>
                     <button className="btn bg-[#D2B48C] border-2 border-[#331A15] font-secondary text-2xl">
