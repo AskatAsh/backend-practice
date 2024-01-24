@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 // middleware
 app.use(cors(
   {
-    origin: ["https://coffee-shop-crud.web.app"],
+    origin: ["https://coffee-shop-client-lcuphswxy-askats-projects.vercel.app"],
     methods: ["POST", "GET", "PUT", "PATCH"],
     credentials: true
   }
