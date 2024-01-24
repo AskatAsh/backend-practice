@@ -4,7 +4,6 @@ const Navbar = () => {
     const navLinks = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/add_coffee">Add Coffee</Link></li>
-        <li><Link to="/login">Login</Link></li>
         <li><Link to="/users">Users</Link></li>
     </>
     return (
@@ -26,6 +25,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
+                <Link to="/login" className="btn mr-1">Login</Link>
                 <Link to="/register" className="btn">Register</Link>
             </div>
         </div>

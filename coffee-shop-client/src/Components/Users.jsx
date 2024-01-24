@@ -10,16 +10,17 @@ const Users = () => {
         fetch(`http://localhost:5000/user/${id}`, {
             method: "DELETE"
         }).then(res => res.json())
-        .then(data => {
-            if(data.deletedCount > 0){
-                console.log("deleted succesfully");
-                // delete data from UI
-                const remainingUsers = users.filter(user => user._id !== id);
-                setUsers(remainingUsers);
-            }
-        })
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    console.log("deleted succesfully");
+                    // delete data from UI
+                    const remainingUsers = users.filter(user => user._id !== id);
+                    setUsers(remainingUsers);
+                }
+            })
 
     }
+
 
     return (
         <div>
@@ -32,17 +33,21 @@ const Users = () => {
                             <th></th>
                             <th>Email</th>
                             <th>Created At</th>
+                            <th>Last Logged At</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             users.map((user, idx) => <tr key={user._id}>
-                                <th>{idx+1}</th>
+                                <th>{idx + 1}</th>
                                 <td>{user.email}</td>
                                 <td>{user.createdAt || "N/A"}</td>
-                                <td onClick={() => handleDelete(user._id)}
-                                className="btn btn-circle btn-error m-3">X</td>
+                                <td>{user.lastLoginAt || "N/A"}</td>
+                                <td>
+                                    <span className="btn btn-circle btn-error m-1"
+                                        onClick={() => handleDelete(user._id)}>X</span>
+                                </td>
                             </tr>)
                         }
                     </tbody>
