@@ -20,12 +20,12 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://coffee-shop-backend-taupe.vercel.app/coffee/${id}`,{
+                fetch(`http://localhost:5000/coffee/${id}`,{
                     method: 'DELETE'
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                         if (data.deletedCount > 0) {
                             const remainingCoffees = coffees.filter(coffee => coffee._id !== id);
                             setCoffees(remainingCoffees);
@@ -55,19 +55,19 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
             </div>
             {/* view, update delete */}
             <div className='flex flex-row lg:flex-col gap-3'>
-                <Link to={`/coffee/${_id}`}>
-                    <button className="bg-[#D2B48C] w-[40px] h-[40px] flex items-center justify-center text-xl text-[#331A15]">
+                <Link to={`/coffee/${_id}`} className="tooltip tooltip-top lg:tooltip-right" data-tip="View Details">
+                    <button className="bg-[#D2B48C] text-[#331A15] w-[40px] h-[40px] flex items-center justify-center text-xl">
                         <FaEye />
                     </button>
                 </Link>
-                <Link to={`/update_coffee/${_id}`}>
-                    <button className="bg-[#D2B48C] w-[40px] h-[40px] flex items-center justify-center text-xl text-[#331A15]">
+                <Link to={`/update_coffee/${_id}`} className="tooltip tooltip-top lg:tooltip-right" data-tip="Update">
+                    <button className="w-[40px] h-[40px] flex items-center justify-center text-xl bg-[#331A15] text-white">
                         <RiEdit2Fill />
                     </button>
                 </Link>
-                <Link>
+                <Link className="tooltip tooltip-top lg:tooltip-right" data-tip="Delete">
                     <button onClick={() => handleDelete(_id)}
-                        className="bg-[#D2B48C] w-[40px] h-[40px] flex items-center justify-center text-xl text-[#331A15]">
+                        className="w-[40px] h-[40px] flex items-center justify-center text-xl bg-red-600 text-white">
                         <RiDeleteBin6Fill />
                     </button>
                 </Link>

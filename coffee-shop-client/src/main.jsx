@@ -32,12 +32,12 @@ const router = createBrowserRouter([
       {
         path: "/update_coffee/:id",
         element: <UpdateCoffee></UpdateCoffee>,
-        loader: ({ params }) => fetch(`https://coffee-shop-backend-taupe.vercel.app/coffee/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/coffee/${params.id}`)
       },
       {
         path: "/coffee/:id",
         element: <Coffee></Coffee>,
-        loader: ({ params }) => fetch(`https://coffee-shop-backend-taupe.vercel.app/coffee/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/coffee/${params.id}`)
       },
       {
         path: "/login",
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <Users></Users>,
-        loader: () => fetch('https://coffee-shop-backend-taupe.vercel.app/user')
+        loader: () => fetch('http://localhost:5000/user')
       }
     ]
   }

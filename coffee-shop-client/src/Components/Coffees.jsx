@@ -8,13 +8,11 @@ const Coffees = () => {
     const [coffees, setCoffees] = useState([]);
 
     useEffect(() => {
-
-        fetch('https://coffee-shop-backend-taupe.vercel.app/coffee')
+        fetch('http://localhost:5000/coffee')
             .then(res => res.json())
             .then(data => setCoffees(data))
 
     }, [])
-    // console.log(coffees);
 
     return (
         <>

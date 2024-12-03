@@ -18,9 +18,9 @@ const UpdateCoffee = () => {
         const photoURL = form.photo.value; 
 
         const updateCoffee = {coffeeName, quantity, supplier, taste, category, details, photoURL};
-        console.log(updateCoffee);
+        // console.log(updateCoffee);
 
-        fetch(`https://coffee-shop-backend-taupe.vercel.app/coffee/${_id}`, {
+        fetch(`http://localhost:5000/coffee/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type' : 'application/json'
@@ -29,7 +29,7 @@ const UpdateCoffee = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             if(data.modifiedCount > 0){
                 Swal.fire({
                     title: 'Success!',

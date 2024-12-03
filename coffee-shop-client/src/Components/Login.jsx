@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const { login } = useContext(AuthContext);
@@ -13,23 +14,35 @@ const Login = () => {
 
         login(email, password)
         .then(userCredentials => {
-            console.log(userCredentials.user);
+            // console.log(userCredentials.user);
             const userInfo = userCredentials.user;
             const user = {
                 email,
                 lastLoginAt: userInfo?.metadata?.lastSignInTime
             }
             // update last logged at in the database
-            fetch('https://coffee-shop-backend-taupe.vercel.app/user', {
+            fetch('http://localhost:5000/user', {
                 method: "PATCH",
                 headers: {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify(user)
+            }).then(res => res.json())
+            .then(data => {
+                if(data.modifiedCount === 1){
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Updated last login time successfully!',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                      })
+                      form.reset();
+                }
             })
         })
+        // eslint-disable-next-line no-unused-vars
         .catch(error => {
-            console.error(error);
+            // console.error(error);
         })
     }
     return (
@@ -57,7 +70,7 @@ const Login = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
+                            <button className="btn bg-[#D2B48C] text-[#331A15]">Login</button>
                         </div>
                     </form>
                 </div>

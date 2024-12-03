@@ -14,9 +14,9 @@ const AddCoffee = () => {
         const photoURL = form.photo.value;
         // console.log(coffeeName, quantity, supplier, taste, category, details, photoURL);
         const coffee = {coffeeName, quantity, supplier, taste, category, details, photoURL};
-        console.log(coffee);
+        // console.log(coffee);
 
-        fetch('https://coffee-shop-backend-taupe.vercel.app/coffee', {
+        fetch('http://localhost:5000/coffee', {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
@@ -25,7 +25,7 @@ const AddCoffee = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             if(data.insertedId){
                 Swal.fire({
                     title: 'Success!',
@@ -53,7 +53,7 @@ const AddCoffee = () => {
                             <label htmlFor="quantity" className="font-semibold">Quantity</label>
                             <br />
                             <input className="border-2 rounded-md py-2 px-2 w-full"
-                                type="text" name="quantity" id="quantity" placeholder="Add chef name" />
+                                type="text" name="quantity" id="quantity" placeholder="Add quantity" />
                         </div>
                     </div>
                     <div className="flex flex-col md:flex-row items-center justify-center gap-7 px-10">
