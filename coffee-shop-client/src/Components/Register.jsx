@@ -16,7 +16,7 @@ const Register = () => {
         // console.log(userCredentials.user);
         const createdAt = userCredentials.user?.metadata?.creationTime;
         const user = { email, createdAt: createdAt };
-        fetch("http://localhost:5000/user", {
+        fetch("https://coffee-shop-backend-taupe.vercel.app/user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
