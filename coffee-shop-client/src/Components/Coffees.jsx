@@ -13,7 +13,7 @@ const Coffees = () => {
         .then(data => {
             // console.log(data.data)
             setCoffees(data.data);
-        });
+        }).catch(error => alert(error.code + " : "+ error.message))
     })
 
     // useEffect(() => {
