@@ -11,7 +11,6 @@ const Coffees = () => {
         fetch('https://coffee-shop-backend-taupe.vercel.app/coffee')
             .then(res => res.json())
             .then(data => setCoffees(data))
-
     }, [])
 
     return (
