@@ -2,16 +2,25 @@ import { useEffect, useState } from 'react'
 import '../App.css'
 import { Link } from 'react-router-dom';
 import CoffeeCard from '../Components/CoffeeCard';
+import axios from 'axios';
 
 
 const Coffees = () => {
     const [coffees, setCoffees] = useState([]);
 
     useEffect(() => {
-        fetch('https://coffee-shop-backend-taupe.vercel.app/coffee')
-            .then(res => res.json())
-            .then(data => setCoffees(data))
-    }, [])
+        axios.get('https://coffee-shop-backend-taupe.vercel.app/coffee')
+        .then(data => {
+            // console.log(data.data)
+            setCoffees(data.data);
+        });
+    })
+
+    // useEffect(() => {
+    //     fetch('https://coffee-shop-backend-taupe.vercel.app/coffee')
+    //         .then(res => res.json())
+    //         .then(data => setCoffees(data))
+    // }, [])
 
     return (
         <>
