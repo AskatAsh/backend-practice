@@ -58,6 +58,7 @@ const Users = () => {
       </p>
     );
   }
+  console.log(deleteUserMutation.isPending);
 
   // const handleDelete = (id) => {
   //   fetch(`https://coffee-shop-backend-taupe.vercel.app/user/${id}`, {
@@ -98,16 +99,16 @@ const Users = () => {
                 <td>{user.lastLoginAt || "N/A"}</td>
                 <td>
                   <button
-                    className={`btn btn-circle btn-error tooltip flex items-center justify-center ${
-                      deleteUserMutation.isLoading
-                        ? "opacity-50 cursor-not-allowed"
-                        : ""
+                    className={`btn-sm tooltip ${
+                      deleteUserMutation.isPending
+                        ? "btn opacity-50 cursor-not-allowed"
+                        : "btn bg-red-500 text-white"
                     }`}
                     data-tip="Remove User"
                     onClick={() => handleDelete(user._id)}
-                    disabled={deleteUserMutation.isLoading}
+                    disabled={deleteUserMutation.isPending}
                   >
-                    {deleteUserMutation.isLoading ? "Deleting..." : "X"}
+                    {deleteUserMutation.isPending ? "Deleting..." : "Delete"}
                   </button>
                 </td>
               </tr>
