@@ -1,20 +1,25 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AddCoffee from "./Components/AddCoffee.jsx";
+import UpdateCoffee from "./Components/UpdateCoffee.jsx";
+import Coffee from "./Components/Coffee.jsx";
+import Login from "./Components/Login.jsx";
+import Register from "./Components/Register.jsx";
+import AuthProvider from "./Context/AuthProvider.jsx";
+import Coffees from "./Components/Coffees.jsx";
+import Users from "./Components/Users.jsx";
 import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import AddCoffee from './Components/AddCoffee.jsx';
-import UpdateCoffee from './Components/UpdateCoffee.jsx';
-import Coffee from './Components/Coffee.jsx';
-import Login from './Components/Login.jsx';
-import Register from './Components/Register.jsx';
-import AuthProvider from './Context/AuthProvider.jsx';
-import Coffees from './Components/Coffees.jsx';
-import Users from './Components/Users.jsx';
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -23,43 +28,52 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Coffees></Coffees>
+        element: <Coffees></Coffees>,
       },
       {
         path: "/add_coffee",
-        element: <AddCoffee></AddCoffee>
+        element: <AddCoffee></AddCoffee>,
       },
       {
         path: "/update_coffee/:id",
         element: <UpdateCoffee></UpdateCoffee>,
-        loader: ({ params }) => fetch(`https://coffee-shop-backend-taupe.vercel.app/coffee/${params.id}`)
+        loader: ({ params }) =>
+          fetch(
+            `https://coffee-shop-backend-taupe.vercel.app/coffee/${params.id}`
+          ),
       },
       {
         path: "/coffee/:id",
         element: <Coffee></Coffee>,
-        loader: ({ params }) => fetch(`https://coffee-shop-backend-taupe.vercel.app/coffee/${params.id}`)
+        loader: ({ params }) =>
+          fetch(
+            `https://coffee-shop-backend-taupe.vercel.app/coffee/${params.id}`
+          ),
       },
       {
         path: "/login",
-        element: <Login></Login>
+        element: <Login></Login>,
       },
       {
         path: "/register",
-        element: <Register></Register>
+        element: <Register></Register>,
       },
       {
         path: "/users",
         element: <Users></Users>,
-        loader: () => fetch('https://coffee-shop-backend-taupe.vercel.app/user')
-      }
-    ]
-  }
+        loader: () =>
+          fetch("https://coffee-shop-backend-taupe.vercel.app/user"),
+      },
+    ],
+  },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </AuthProvider>
-  </React.StrictMode>,
-)
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+  </React.StrictMode>
+);
