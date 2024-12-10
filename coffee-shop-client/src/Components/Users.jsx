@@ -1,25 +1,76 @@
-import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const Users = () => {
-  const loadedUsers = useLoaderData();
-  const [users, setUsers] = useState(loadedUsers);
+  const queryClient = useQueryClient();
+
+  const {
+    isPending,
+    data: users,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await fetch(
+        "https://coffee-shop-backend-taupe.vercel.app/user"
+      );
+      if (!res.ok) {
+        throw new Error("Failed to fetch users data.");
+      }
+      return res.json();
+    },
+  });
+
+  const deleteUserMutation = useMutation({
+    mutationFn: async (id) => {
+      const res = await fetch(
+        `https://coffee-shop-backend-taupe.vercel.app/user/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!res.ok) {
+        throw new Error("Failed to delete user.");
+      }
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]);
+    },
+  });
 
   const handleDelete = (id) => {
-    // console.log("hello", id);
-    fetch(`https://coffee-shop-backend-taupe.vercel.app/user/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount > 0) {
-          // console.log("deleted succesfully");
-          // delete data from UI
-          const remainingUsers = users.filter((user) => user._id !== id);
-          setUsers(remainingUsers);
-        }
-      });
+    deleteUserMutation.mutate(id);
   };
+
+  if (isPending) {
+    return (
+      <p className="text-xl font-semibold text-center flex items-center gap-2 justify-center">
+        Loading...<span className="loading loading-spinner loading-xs"></span>
+      </p>
+    );
+  }
+
+  if (isError) {
+    return (
+      <p className="text-base font-semibold text-center flex items-center gap-2 justify-center text-red-600">
+        {error.message}
+      </p>
+    );
+  }
+
+  // const handleDelete = (id) => {
+  //   fetch(`https://coffee-shop-backend-taupe.vercel.app/user/${id}`, {
+  //     method: "DELETE",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.deletedCount > 0) {
+  //         const remainingUsers = users.filter((user) => user._id !== id);
+  //         setUsers(remainingUsers);
+  //       }
+  //     });
+  // };
 
   return (
     <div>
@@ -39,20 +90,25 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, idx) => (
+            {users?.map((user, idx) => (
               <tr key={user._id}>
                 <th>{idx + 1}</th>
                 <td>{user.email}</td>
                 <td>{user.createdAt || "N/A"}</td>
                 <td>{user.lastLoginAt || "N/A"}</td>
                 <td>
-                  <span
-                    className="btn btn-circle btn-error tooltip flex items-center justify-center"
+                  <button
+                    className={`btn btn-circle btn-error tooltip flex items-center justify-center ${
+                      deleteUserMutation.isLoading
+                        ? "opacity-50 cursor-not-allowed"
+                        : ""
+                    }`}
                     data-tip="Remove User"
                     onClick={() => handleDelete(user._id)}
+                    disabled={deleteUserMutation.isLoading}
                   >
-                    X
-                  </span>
+                    {deleteUserMutation.isLoading ? "Deleting..." : "X"}
+                  </button>
                 </td>
               </tr>
             ))}

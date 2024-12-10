@@ -12,9 +12,6 @@ import AuthProvider from "./Context/AuthProvider.jsx";
 import Coffees from "./Components/Coffees.jsx";
 import Users from "./Components/Users.jsx";
 import {
-  useQuery,
-  useMutation,
-  useQueryClient,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
@@ -61,8 +58,8 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <Users></Users>,
-        loader: () =>
-          fetch("https://coffee-shop-backend-taupe.vercel.app/user"),
+        // loader: () =>
+        //   fetch("https://coffee-shop-backend-taupe.vercel.app/user"),
       },
     ],
   },
